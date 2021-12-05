@@ -57,3 +57,17 @@ create table pedidos (
 (4, 4, datetime('now')); 
   
   SELECT * FROM pedidos
+
+--Mostrar quantas vezes cada pizza foi pedida
+    SELECT pz.nomepizza, COUNT (p.idpizza) AS " Número de vezes que uma pizza foi pedida"
+FROM pizza pz, pedidos p
+INNER JOIN pizza ON pz.idPizza = p.idpizza
+GROUP BY pz.nomepizza 
+ORDER by  COUNT (p.idpizza) DESC
+;
+
+--Mostrar o nome do cliente, data, hora e qual é a pizza que ele pediu
+SELECT cliente.nomeCliente AS "Cliente", pedidos.data AS "Data e Hora", pizza.nomePizza as "Pedido"
+FROM pedidos
+INNER JOIN cliente ON pedidos.idCliente = cliente.idCliente
+INNER JOIN pizza ON pedidos.idPizza = pizza.idPizza; 
